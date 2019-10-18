@@ -1,7 +1,7 @@
 #===========================================================================
 # DETECTION OF POLYGENIC SELECTION IN GENESETS (POLYSEL)
 #
-# MODULE: polysel.R
+# MODULE: PolyLink.R
 #
 # This module contains functions to run a gene set enrichment analysis to 
 # find signals of polygenic selection on pathways 

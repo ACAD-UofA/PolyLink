@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 
 ##Example command line
-#Rscript --verbose --vanilla ~/Dropbox/Selection_test/Scripts/polysel_CMD.r ~/Dropbox/Selection_test/Scripts/ PolySel/Input PolySel/Output Anatolia_EF 1000000 3
+#Rscript --verbose --vanilla ~/Dropbox/Selection_test/Scripts/PolyLink_CMD.r ~/Dropbox/Selection_test/Scripts/ PolyLink/Input PolyLink/Output Anatolia_EF 1000000 3
 
 library("qvalue")
 library("Matrix")
@@ -15,7 +15,7 @@ library("doParallel")
 args <- commandArgs(trailingOnly=TRUE)
 
 ##test example to run from within R
-#args <- c("~/Dropbox/Selection_test/", "PolySel/Input", "PolySel/Output", "EHG", 10000, 3)
+#args <- c("~/Dropbox/Selection_test/", "PolyLink/Input", "PolyLink/Output", "EHG", 10000, 3)
 
 
 ##pathway to files
@@ -36,9 +36,9 @@ emp.nruns <- as.numeric(args[5])
 ##number of cores to use for permutations
 n.cores <- as.numeric(args[6])
 
-##read in polysel R functions
+##read in PolyLink R functions
 code.path <- file.path(pth, "Scripts")
-source(file.path(code.path,'polysel.R'))
+source(file.path(code.path,'PolyLink.R'))
 
 ##create folders for output
 dir.create(paste0(out.path, "/", groupname))

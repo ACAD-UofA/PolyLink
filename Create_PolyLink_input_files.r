@@ -11,7 +11,7 @@ raw.path <- file.path(work.dir, "Raw_files")
 
 #read in genes and go categories
 genes <- fread(file.path(raw.path, "Entrez_Gene_IDs_positions_HG19.txt"))
-go.cats <- fread(file.path(raw.path, "PolySel_GO_pathways_HG19.txt"))
+go.cats <- fread(file.path(raw.path, "PolyLink_GO_pathways_HG19.txt"))
 go.cats[, setID:=as.numeric(factor(Pathway))]
 
 #read in corrected Z scores
@@ -20,7 +20,7 @@ file.in <- ll[grep(".*GeneLengthCorrected.txt", ll)]
 scores <- fread(file.path(work.dir, "GeneScores", file.in))
 
 #output file path
-out.path <- file.path(work.dir, "PolySel/Input")
+out.path <- file.path(work.dir, "PolyLink/Input")
 
 pops <- unique(scores$Population)
 for(pop in pops){

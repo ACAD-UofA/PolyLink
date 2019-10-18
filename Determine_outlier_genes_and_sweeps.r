@@ -19,9 +19,9 @@ raw.path <- file.path(work.dir, "Raw_files")
 #path to sweepfinder files
 sf.path <- file.path(work.dir, "SweepFinder")
 
-# load polysel libraries
+# load PolyLink libraries
 scripts.path <- file.path(work.dir, "Scripts")
-source(file.path(scripts.path, "polysel.R")) 
+source(file.path(scripts.path, "PolyLink.R")) 
 
 #make output directory
 out.path <- file.path(work.dir, "GeneScores")
@@ -107,7 +107,7 @@ all.sf <- fread(file.path(out.path, "GeneScores_max_LR.txt"))
 #Log transform scores
 all.sf[, log10.LR.gene.max:=log10(LR.gene.max+0.01)]
 
-#adjust score for gene length (uses function from PolySel -- SLOW)
+#adjust score for gene length (uses function from PolyLink -- SLOW)
 minbs <- 2000; maxbs <- 2500 #defaults
 all.sf[, GeneLength:=End-Start]
 
@@ -119,7 +119,7 @@ bins <- AssignBins(unq.genes, fld="GeneLength",
 out <- merge(all.sf, bins[, .(GeneID, objBin)], by="GeneID")
 
 
-#modified function to allow for NAs (adapted from PolySel function, allowing for missing data)
+#modified function to allow for NAs (adapted from PolyLink function, allowing for missing data)
 modz<- function(x){
    y<-x-median(x, na.rm=T)
    return(0.6745*y/median(abs(y), na.rm=T))

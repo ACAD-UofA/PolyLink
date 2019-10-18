@@ -12,12 +12,12 @@ setwd(work.dir)
 #path to raw files (genes + pathway info)
 raw.path <- file.path(work.dir, "Raw_files")
 
-#polysel output directory
-out.path <- file.path(work.dir, "PolySel/Output")
+#PolyLink output directory
+out.path <- file.path(work.dir, "PolyLink/Output")
 
 ll <- list.files(out.path)
 
-#enter all PolySel output data
+#enter all PolyLink output data
 d.newmeth <- foreach(j=ll, .combine=rbind) %do% {
    fp <- file.path(out.path, j, "results")
    ll2 <- list.files(fp)
@@ -30,7 +30,7 @@ d.newmeth <- foreach(j=ll, .combine=rbind) %do% {
 
 #add source info
 
-go.cats <- fread(file.path(raw.path, "PolySel_GO_pathways_HG19.txt"))
+go.cats <- fread(file.path(raw.path, "PolyLink_GO_pathways_HG19.txt"))
 d.newmeth <- merge(d.newmeth, go.cats[!duplicated(Pathway), .(Pathway, Source)], 
                    by.x="setName", by.y="Pathway")
 
@@ -95,7 +95,7 @@ ggplot(d.newmeth, aes(x=setP)) +
          panel.spacing.x=unit(0.025, "lines"),
          panel.spacing.y=unit(0.01, "lines"))
 
-ggsave(filename=file.path(plot.path, "PolySel.p.value.distribution.pdf"),
+ggsave(filename=file.path(plot.path, "PolyLink.p.value.distribution.pdf"),
        width=8, height=6, dpi=300)
 
 
@@ -163,7 +163,7 @@ for(cl in list("", "Small")){
             legend.margin=margin(t=0, r=0, b=-0.05, l=0, unit="cm")) +
       guides(fill=guide_legend(nrow=1), size=4)
 
-   out <- paste0(plot.path, "/heatmap_PolySel_SweepFinder", cl, ".pdf")
+   out <- paste0(plot.path, "/heatmap_PolyLink_SweepFinder", cl, ".pdf")
 
    ggsave(filename=out, width=8, height=4, dpi=300)
 }
