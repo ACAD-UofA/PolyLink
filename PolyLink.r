@@ -3,19 +3,16 @@
 #
 # MODULE: PolyLink.R
 #
-# This module contains functions to run a gene set enrichment analysis to 
-# find signals of polygenic selection on pathways 
+# This script defines functions to run a gene-based pathway enrichment. 
 #
-# Created by: Josephine Daub, 
-#             CMPG lab, University of Bern, Switzerland
-#             Department of Ecology and Evolution, University of Lausanne, 
-#             Switzerland
-#             Current address: Institute for Evolutionary Biology, UPF-CSIC, 
-#             Barcelona, Spain
-# Created: Wednesday 16, 2016
+# Created by: Raymond Tobler <tingalinx@gmail.com>
 #
-#===========================================================================
-
+# NOTE: This package has been heavily inspired by POLYSEL:
+# https://github.com/CMPG/polysel
+# 
+# While we use the same input format, and a good number of functions from
+# POLYSEL, the core algorithms are substantially different in PolyLink.
+#
 #===========================================================================
 # Function: ReadSetObjTables(in.path, set.info.file,set.obj.file,
 #                            obj.info.file)
@@ -36,6 +33,7 @@
 # Internal numeric IDs will be assigned to objects and sets to improve 
 # further computations
 #===========================================================================
+
 ReadSetObjTables<-function(in.path, set.info.file, set.obj.file,
                            obj.info.file, minsetsize=10, maxsetsize=1000,
                            obj.in.set=FALSE, merge.similar.sets){
@@ -259,7 +257,6 @@ EnrichmentAnalysis<-function(set.info, set.obj, obj.stat,
                        qvalue.method="bootstrap"){
   
   set.seed(nrand)
-  
   
   set.scores.prepruning<-TestGeneSets(set.info, set.obj, obj.stat,
                  nrand=nrand, approx.null=approx.null, 
@@ -515,6 +512,7 @@ TestGeneSets<-function(set.info, set.obj, obj.stat,
 #                     only contains objects that are part of 
 #                     at least one geneset)
 #===========================================================================
+
 PruneSets<-function(set.info, set.obj, obj.stat, set.scores, 
                     nrand=10000, minsetsize=10,
                     approx.null=FALSE, seq.rnd.sampling=TRUE,
@@ -731,7 +729,6 @@ GetEmpericalFDR<-function(set.scores, in.path, nruns=3, est.m0=T,
   
 }
 
-
 #===========================================================================
 # Function: CreateNullDist_Binned(stats, bin.ix, maxbin, bindistmtx, 
 #                                 scores, nrand, test)
@@ -748,6 +745,7 @@ GetEmpericalFDR<-function(set.scores, in.path, nruns=3, est.m0=T,
 # - nrand     : number of randomizations
 # - test      : choose "highertail", "lowertail", or "twosided"
 #===========================================================================
+
 CreateNullDist_Binned<-function(stats, bin.ix, maxbin, bindistmtx, 
                                 scores, nrand, test="highertail"){
   
