@@ -1,5 +1,5 @@
 
-# PolyLink
+# `PolyLink: gene-based pathway enrichment` <img src="inst/sticker/polylinkr_150px.png" align="right" />
 Is an R package that performs gene-based pathway enrichment, which can also be used as evidence for polygenic selection in case the software is used with selection signals evidence. The package explicitly also accounts for linkage desiquilibrium between adjacent loci belonging on the same pathway.
 
 While we use the same input format, and a good number of functions from [POLYSEL](https://github.com/CMPG/polysel), the core algorithms are substantially different in PolyLink
